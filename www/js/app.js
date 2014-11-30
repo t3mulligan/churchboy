@@ -41,7 +41,7 @@ $scope.searchLoad=false;
 
 
 
-//===General Scope Declarations=====================================================
+//===General Scope Declarations========================test=============================
         $scope.searchZip = function (){
             $scope.searchForm=false;
             $scope.searchLoad=true;
@@ -98,8 +98,8 @@ $scope.searchLoad=false;
 
 ////////////////////TEST/////////////////////////
 /////////////////////////////////////////////////
-//          $scope.form1.zipBox="48124";
-//          $scope.geocoderFCN();
+          $scope.form1.zipBox="48124";
+          $scope.geocoderFCN();
 ////////////////////////////////////////////////
 ///////////////////////////////////////////////
 
@@ -117,6 +117,7 @@ $scope.searchLoad=false;
                 churchPhone = rawData[i].phone_number;
                 churchUrl = rawData[i].url;
                 churchLong = rawData[i].longitude;
+                churchLat = rawData[i].latitude;
 
 
                 var times = [];
