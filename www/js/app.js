@@ -2,107 +2,110 @@ angular.module('app', ['ionic', 'uiGmapgoogle-maps', 'ngCordova'])
 
     .controller('controller1', function ($scope, $http, $location) {
 
-$scope.form1={};
-$scope.searchForm=true;
-$scope.searchLoad=false;
+        $scope.form1 = {};
+        $scope.searchForm = true;
+        $scope.searchLoad = false;
 
 
+        var onSuccess = function (position) {
+            //alert('Latitude: ' + position.coords.latitude + '\n' +
+            //'Longitude: ' + position.coords.longitude + '\n' +
+            //'Altitude: ' + position.coords.altitude + '\n' +
+            //'Accuracy: ' + position.coords.accuracy + '\n' +
+            //'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '\n' +
+            //'Heading: ' + position.coords.heading + '\n' +
+            //'Speed: ' + position.coords.speed + '\n' +
+            //'Timestamp: ' + position.timestamp + '\n');
+
+            $scope.form1.zipBox=position.coords.latitude + ',' + position.coords.longitude;
+            $scope.geocoderFCN();
+
+            $location.path('/results');
+
+            $scope.searchForm = true;
+            $scope.searchLoad = false;
 
 
-
-
-
-
-        var onSuccess = function(position) {
-            alert('Latitude: '          + position.coords.latitude          + '\n' +
-            'Longitude: '         + position.coords.longitude         + '\n' +
-            'Altitude: '          + position.coords.altitude          + '\n' +
-            'Accuracy: '          + position.coords.accuracy          + '\n' +
-            'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '\n' +
-            'Heading: '           + position.coords.heading           + '\n' +
-            'Speed: '             + position.coords.speed             + '\n' +
-            'Timestamp: '         + position.timestamp                + '\n');
         };
 
 // onError Callback receives a PositionError object
 //
         function onError(error) {
-            alert('code: '    + error.code    + '\n' +
+            alert('code: ' + error.code + '\n' +
             'message: ' + error.message + '\n');
         }
 
-        navigator.geolocation.getCurrentPosition(onSuccess, onError);
+        $scope.geoLoc= function(){
 
 
+            navigator.geolocation.getCurrentPosition(onSuccess, onError);
 
 
-
-
-
+        }
 
 
 //===General Scope Declarations========================test=============================
-        $scope.searchZip = function (){
-            $scope.searchForm=false;
-            $scope.searchLoad=true;
+        $scope.searchZip = function () {
+            $scope.searchForm = false;
+            $scope.searchLoad = true;
             $scope.geocoderFCN();
 
-           // console.log($scope.form1.zasipBox);
+            // console.log($scope.form1.zasipBox);
         };
 //===============Details===================
-        $scope.goDetails = function(church){
-        $location.path('/details');
-        $scope.church=church;
+        $scope.goDetails = function (church) {
+            $location.path('/details');
+            $scope.church = church;
             var mapOptions = {
-                panControl    : false,
-                zoomControl   : true,
-                scaleControl  : false,
+                panControl: false,
+                zoomControl: true,
+                scaleControl: false,
                 mapTypeControl: false,
                 streetViewControl: false
             };
-        $scope.map = { center: { latitude: church.lat, longitude: church.long }, zoom: 14, options: mapOptions };
+            $scope.map = {center: {latitude: church.lat, longitude: church.long}, zoom: 14, options: mapOptions};
             $scope.marker = {
                 id: 0,
                 coords: {
                     latitude: church.lat,
                     longitude: church.long
                 }
-            };            console.log($scope.marker);
+            };
+            console.log($scope.marker);
 
         };
 //==========Geocoder================================================================
-    $scope.geocoderFCN = function () {
-        geocoder = new google.maps.Geocoder();
-        geocoder.geocode({"address": $scope.form1.zipBox}, function (results, status) {
-            if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
-                var location = results[0].geometry.location;
+        $scope.geocoderFCN = function () {
+            geocoder = new google.maps.Geocoder();
+            geocoder.geocode({"address": $scope.form1.zipBox}, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
+                    var location = results[0].geometry.location;
 
-                $http.get('http://apiv4.updateparishdata.org/Churchs/?lat=' + location.k + '&long=' + location.B + '&pg=1').
-                    success(function (data) {
+                    $http.get('http://apiv4.updateparishdata.org/Churchs/?lat=' + location.k + '&long=' + location.B + '&pg=1').
+                        success(function (data) {
 
-                        $scope.churchData = data;
-                        $scope.parseData($scope.churchData);
-                        $location.path('/results');
-                        $scope.searchLoad=false;
-                        $scope.searchForm=true;
+                            $scope.churchData = data;
+                            $scope.parseData($scope.churchData);
+                            $location.path('/results');
+                            $scope.searchLoad = false;
+                            $scope.searchForm = true;
 
-                    }).
-                    error(function (data, status, headers, config) {
-                        // called asynchronously if an error occurs
-                        // or server returns response with an error status.
-                    });
-            }
-        });
-    };
+                        }).
+                        error(function (data, status, headers, config) {
+                            // called asynchronously if an error occurs
+                            // or server returns response with an error status.
+                        });
+                }
+            });
+        };
 
 
 ////////////////////TEST/////////////////////////
 /////////////////////////////////////////////////
-          $scope.form1.zipBox="48124";
-          $scope.geocoderFCN();
+//        $scope.form1.zipBox = "48124";
+//        $scope.geocoderFCN();
 ////////////////////////////////////////////////
 ///////////////////////////////////////////////
-
 
 
 //Parse Data========================================================================
@@ -127,7 +130,7 @@ $scope.searchLoad=false;
                         'day': rawData[i].church_worship_times[j].day_of_week,
                         'time': rawData[i].church_worship_times[j].time_start
                     });
-                    if(rawData[i].church_worship_times[j].day_of_week === "Sunday    "){
+                    if (rawData[i].church_worship_times[j].day_of_week === "Sunday    ") {
                         hasSundayMass = true;
                     }
                 }
@@ -155,46 +158,46 @@ $scope.searchLoad=false;
     })
 
     .run(function ($ionicPlatform) {
-      $ionicPlatform.ready(function () {
-        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-        // for form inputs)
-        if (window.cordova && window.cordova.plugins.Keyboard) {
-          cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-        }
-        if (window.StatusBar) {
-          // org.apache.cordova.statusbar required
-          StatusBar.styleDefault();
-        }
-      });
+        $ionicPlatform.ready(function () {
+            // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+            // for form inputs)
+            if (window.cordova && window.cordova.plugins.Keyboard) {
+                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+            }
+            if (window.StatusBar) {
+                // org.apache.cordova.statusbar required
+                StatusBar.styleDefault();
+            }
+        });
     })
 
     .config(function ($stateProvider, $urlRouterProvider) {
 
-      // Ionic uses AngularUI Router which uses the concept of states
-      // Learn more here: https://github.com/angular-ui/ui-router
-      // Set up the various states which the app can be in.
-      // Each state's controller can be found in controllers.js
-      $stateProvider
+        // Ionic uses AngularUI Router which uses the concept of states
+        // Learn more here: https://github.com/angular-ui/ui-router
+        // Set up the various states which the app can be in.
+        // Each state's controller can be found in controllers.js
+        $stateProvider
 
-          .state('page13', {
-            url: '/home',
-            templateUrl: 'page13.html'
-          })
+            .state('page13', {
+                url: '/home',
+                templateUrl: 'page13.html'
+            })
 
-          .state('page15', {
-            url: '/results',
-            templateUrl: 'page15.html'
-          })
+            .state('page15', {
+                url: '/results',
+                templateUrl: 'page15.html'
+            })
 
-          .state('page17', {
-              url: '/details',
-              templateUrl: 'page17.html'
-          })
-      ;
+            .state('page17', {
+                url: '/details',
+                templateUrl: 'page17.html'
+            })
+        ;
 
-      // if none of the above states are matched, use this as the fallback
+        // if none of the above states are matched, use this as the fallback
 
-      $urlRouterProvider.otherwise('/home');
+        $urlRouterProvider.otherwise('/home');
 
 
     });
