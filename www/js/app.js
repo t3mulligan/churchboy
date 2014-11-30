@@ -47,7 +47,7 @@ $scope.searchLoad=false;
             $scope.searchLoad=true;
             $scope.geocoderFCN();
 
-           // console.log($scope.form1.zipBox);
+           // console.log($scope.form1.zasipBox);
         };
 //===============Details===================
         $scope.goDetails = function(church){
