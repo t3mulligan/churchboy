@@ -6,26 +6,11 @@
     <title></title>
 
 
-    <link href="css/style.css" rel="stylesheet">
-
-
-
-
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
-
     <script src="js/app.js"></script>
-    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
     <script src="cordova.js"></script>
-
-
-    <!-- style link to compiled SASS -->
-    <!-- <link href="css/ionic.app.css" rel="stylesheet"> -->
-
-    <!-- static ionic style -->
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-
-
 
 
 </head>
@@ -50,13 +35,9 @@
                     <input type="text" placeholder="City, State or Zip Code" ng-model="form1.zipBox">
                 </label>
                 <button ng-click="searchZip()" class="button button-stable button-block">Search</button>
-            <button ng-click="geoLoc()" class="button button-stable button-block">Near Me</button>
             </form>
         </ion-content>
-
-
     </ion-view>
-
 </script>
 
 <!-- ============Results Page===================================================== -->
@@ -71,7 +52,8 @@
                 </div>
             </div>
         </ion-content>
-    </ion-view></script>
+    </ion-view>
+</script>
 
 <!--===========Details============================================================-->
 
@@ -84,17 +66,11 @@
                     <ion-item>{{church.address}} </br> {{church.city}} {{church.state}} {{church.zipcode}}</ion-item>
                     <ion-item>{{church.url}}</ion-item>
                     <ion-item>{{church.phone}}</ion-item>
-                    <ion-item>
-                        <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="map.options">
-                            <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
-                            </ui-gmap-marker>
-                        </ui-gmap-google-map>
-                    </ion-item>
-
                 </div>
             </div>
         </ion-content>
-    </ion-view></script>
+    </ion-view>
+</script>
 
 
 
@@ -106,8 +82,6 @@
 
 <!---------Dependencies for Angular Map Plugin ------------------------------------->
 <script src='http://maps.googleapis.com/maps/api/js?sensor=false'></script>
-<script type="text/javascript" src="lib/lodash/dist/lodash.min.js"></script>
-<script type="text/javascript" src="lib/angular-google-maps/dist/angular-google-maps.min.js"></script>
 <!---------------------------------------------------------------------------------->
 </body>
 </html>

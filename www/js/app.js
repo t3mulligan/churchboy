@@ -1,42 +1,9 @@
-angular.module('app', ['ionic', 'uiGmapgoogle-maps', 'ngCordova'])
+angular.module('app', ['ionic'])
 
     .controller('controller1', function ($scope, $http, $location, $ionicLoading) {
 
         $scope.form1 = {};
 
-
-        var onSuccess = function (position) {
-            //alert('Latitude: ' + position.coords.latitude + '\n' +
-            //'Longitude: ' + position.coords.longitude + '\n' +
-            //'Altitude: ' + position.coords.altitude + '\n' +
-            //'Accuracy: ' + position.coords.accuracy + '\n' +
-            //'Altitude Accuracy: ' + position.coords.altitudeAccuracy + '\n' +
-            //'Heading: ' + position.coords.heading + '\n' +
-            //'Speed: ' + position.coords.speed + '\n' +
-            //'Timestamp: ' + position.timestamp + '\n');
-
-            $scope.form1.zipBox=position.coords.latitude + ',' + position.coords.longitude;
-            $scope.geocoderFCN();
-
-
-
-
-
-        };
-
-// onError Callback receives a PositionError object
-//
-        function onError(error) {
-            alert('code: ' + error.code + '\n' +
-            'message: ' + error.message + '\n');
-        }
-
-        $scope.geoLoc= function(){
-            $ionicLoading.show();
-            navigator.geolocation.getCurrentPosition(onSuccess, onError);
-
-
-        };
 
 
 //===General Scope Declarations========================test=============================
@@ -44,7 +11,6 @@ angular.module('app', ['ionic', 'uiGmapgoogle-maps', 'ngCordova'])
             $ionicLoading.show();
             $scope.geocoderFCN();
 
-            // console.log($scope.form1.zasipBox);
         };
 //===============Details===================
         $scope.goDetails = function (church) {
@@ -92,12 +58,6 @@ angular.module('app', ['ionic', 'uiGmapgoogle-maps', 'ngCordova'])
         };
 
 
-////////////////////TEST/////////////////////////
-/////////////////////////////////////////////////
-//        $scope.form1.zipBox = "48124";
-//        $scope.geocoderFCN();
-////////////////////////////////////////////////
-///////////////////////////////////////////////
 
 
 //Parse Data========================================================================
