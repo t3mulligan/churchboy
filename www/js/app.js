@@ -1,11 +1,8 @@
 angular.module('app', ['ionic', 'uiGmapgoogle-maps', 'ngCordova'])
 
-    .controller('controller1', function ($scope, $http, $location) {
+    .controller('controller1', function ($scope, $http, $location, $ionicLoading) {
 
         $scope.form1 = {};
-        $scope.searchForm = true;
-        $scope.searchLoad = false;
-        //test
 
 
         var onSuccess = function (position) {
@@ -21,10 +18,8 @@ angular.module('app', ['ionic', 'uiGmapgoogle-maps', 'ngCordova'])
             $scope.form1.zipBox=position.coords.latitude + ',' + position.coords.longitude;
             $scope.geocoderFCN();
 
-            $location.path('/results');
 
-            $scope.searchForm = true;
-            $scope.searchLoad = false;
+
 
 
         };
@@ -37,8 +32,7 @@ angular.module('app', ['ionic', 'uiGmapgoogle-maps', 'ngCordova'])
         }
 
         $scope.geoLoc= function(){
-
-
+            $ionicLoading.show();
             navigator.geolocation.getCurrentPosition(onSuccess, onError);
 
 
@@ -47,8 +41,7 @@ angular.module('app', ['ionic', 'uiGmapgoogle-maps', 'ngCordova'])
 
 //===General Scope Declarations========================test=============================
         $scope.searchZip = function () {
-            $scope.searchForm = false;
-            $scope.searchLoad = true;
+            $ionicLoading.show();
             $scope.geocoderFCN();
 
             // console.log($scope.form1.zasipBox);
@@ -87,9 +80,7 @@ angular.module('app', ['ionic', 'uiGmapgoogle-maps', 'ngCordova'])
 
                             $scope.churchData = data;
                             $scope.parseData($scope.churchData);
-                            $location.path('/results');
-                            $scope.searchLoad = false;
-                            $scope.searchForm = true;
+
 
                         }).
                         error(function (data, status, headers, config) {
@@ -151,8 +142,10 @@ angular.module('app', ['ionic', 'uiGmapgoogle-maps', 'ngCordova'])
                 });
 
 
-                console.log($scope.churchArray);
+                //console.log($scope.churchArray);
             }
+            $location.path('/results');
+            $ionicLoading.hide();
         };
 
 

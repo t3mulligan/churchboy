@@ -43,7 +43,7 @@
 
 <script id="page13.html" type="text/ng-template">
     <ion-view view-title="Churchboy">
-        <ion-content ng-show="searchForm" padding="true" class="has-header">
+        <ion-content padding="true" class="has-header">
             <form>
                 <label class="item item-input" name="zip">
                     <span class="input-label">Location:</span>
@@ -52,13 +52,6 @@
                 <button ng-click="searchZip()" class="button button-stable button-block">Search</button>
             <button ng-click="geoLoc()" class="button button-stable button-block">Near Me</button>
             </form>
-        </ion-content>
-
-
-        <ion-content ng-show="searchLoad">
-            <div class="loaderContainer">
-                <img class="loader" src="images/loader.gif">
-            </div>
         </ion-content>
 
 
