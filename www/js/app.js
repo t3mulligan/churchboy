@@ -5,6 +5,7 @@ angular.module('app', ['ionic', 'uiGmapgoogle-maps', 'ngCordova'])
         $scope.form1 = {};
         $scope.searchForm = true;
         $scope.searchLoad = false;
+        //test
 
 
         var onSuccess = function (position) {
