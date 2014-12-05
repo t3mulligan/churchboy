@@ -36,7 +36,7 @@ angular.module('app', ['ionic', 'uiGmapgoogle-maps', 'ngCordova'])
             navigator.geolocation.getCurrentPosition(onSuccess, onError);
 
 
-        }
+        };
 
 
 //===General Scope Declarations========================test=============================
@@ -146,6 +146,7 @@ angular.module('app', ['ionic', 'uiGmapgoogle-maps', 'ngCordova'])
             }
             $location.path('/results');
             $ionicLoading.hide();
+
         };
 
 
@@ -186,8 +187,7 @@ angular.module('app', ['ionic', 'uiGmapgoogle-maps', 'ngCordova'])
             .state('page17', {
                 url: '/details',
                 templateUrl: 'page17.html'
-            })
-        ;
+            });
 
         // if none of the above states are matched, use this as the fallback
 
