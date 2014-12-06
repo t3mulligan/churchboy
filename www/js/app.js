@@ -142,7 +142,7 @@ angular.module('app', ['ionic', 'uiGmapgoogle-maps', 'ngCordova'])
                 });
 
 
-                //console.log($scope.churchArray);
+                console.log($scope.churchArray);
             }
             $location.path('/results');
             $ionicLoading.hide();
@@ -177,6 +177,7 @@ angular.module('app', ['ionic', 'uiGmapgoogle-maps', 'ngCordova'])
 
         //cache forward views (details page)
         $ionicConfigProvider.views.forwardCache(true);
+        $ionicConfigProvider.views.transition('platform'); //'none' disables transitions
 
 
 
