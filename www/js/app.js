@@ -74,8 +74,7 @@ angular.module('app', ['ionic', 'uiGmapgoogle-maps', 'ngCordova'])
             geocoder.geocode({"address": $scope.form1.zipBox}, function (results, status) {
                 if (status == google.maps.GeocoderStatus.OK && results.length > 0) {
                     var location = results[0].geometry.location;
-
-                    $http.get('http://apiv4.updateparishdata.org/Churchs/?lat=' + location.k + '&long=' + location.B + '&pg=1').
+                    $http.get('http://apiv4.updateparishdata.org/Churchs/?lat=' + location.k + '&long=' + location.D + '&pg=1').
                         success(function (data) {
 
                             $scope.churchData = data;
